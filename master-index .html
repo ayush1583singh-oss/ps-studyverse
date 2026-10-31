@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PS STUDYVERSE - DARK + OTP</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{background:#050508;color:#fff;min-height:100vh;padding-bottom:80px}
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#0a0a12;border-bottom:1px solid #1a1a2e;position:sticky;top:0;z-index:100}
+.main-logo{width:44px;height:44px;border-radius:10px;background:#141427;display:flex;align-items:center;justify-content:center;font-weight:900;color:#a78bfa;box-shadow:0 0 20px #7c3aed;border:1px solid #7c3aed}
+.search-box{margin:16px;background:#0f0f1a;border:1px solid #1e1e32;border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.search-box input{flex:1;background:transparent;border:none;color:#6a6a8a;font-size:13px;outline:none}
+.insta-banner{margin:0 16px 16px;background:#0f0f1a;border:1px solid #1e1e32;border-radius:18px;padding:14px;display:flex;align-items:center;justify-content:space-between}
+.container{padding:0 14px;max-width:500px;margin:0 auto}
+.section-title{text-align:center;font-size:11.5px;font-weight:800;color:#5a5a7a;letter-spacing:1px;margin:20px 0 12px}
+.batch-card{background:#0f0f1a;border-radius:20px;padding:16px;margin-bottom:14px;border:1px solid #1e1e32;text-align:center}
+.ps-batch-logo{width:90px;height:90px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 10px}
+.ps-batch-logo .ps-text{font-size:36px;font-weight:900;color:#fff}
+.udaan-bg{background:radial-gradient(circle at 30% 30%,#fb923c,#ea580c,#7c2d12);box-shadow:0 0 25px #f97316;border:2.5px solid #f97316}
+.arjuna-bg{background:radial-gradient(circle at 30% 30%,#a855f7,#7c3aed,#4c1d95);box-shadow:0 0 25px #a855f7;border:2.5px solid #a855f7}
+.lakshya-bg{background:radial-gradient(circle at 30% 30%,#22d3ee,#0891b2,#0e7490);box-shadow:0 0 25px #06b6d4;border:2.5px solid #06b6d4}
+.btn-row{display:flex;gap:6px;margin-top:10px}
+.btn{padding:9px 14px;border-radius:20px;font-size:11px;font-weight:700;border:none;flex:1;cursor:pointer}
+.btn-study{background:#7c3aed;color:#fff}
+.btn-down{background:#15151f;color:#6a6a8a;border:1px solid #1e1e32}
+.btn-login{background:transparent;border:1.5px solid #22c55e;color:#22c55e}
+.facility-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.facility{background:#0f0f1a;border:1px solid #1e1e32;border-radius:12px;padding:10px;display:flex;align-items:center;gap:8px}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#050508;border-top:1px solid #1a1a2e;display:flex;justify-content:space-around;padding:10px 0 12px;z-index:200}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;color:#3a3a5a;cursor:pointer}
+.nav-item.active{color:#7c3aed}
+.nav-item .ico{font-size:20px}.nav-item .lbl{font-size:10px;font-weight:600}
+
+/* OTP LOGIN MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;z-index:999;padding:20px}
+.modal{background:#12121f;border:1px solid #2a2a50;border-radius:20px;padding:22px;width:100%;max-width:360px;box-shadow:0 0 40px rgba(124,58,237,0.3)}
+.modal h3{font-size:16px;font-weight:800;text-align:center}
+.modal p{font-size:11px;color:#6a6a8a;text-align:center;margin-top:6px}
+.input-box{margin-top:16px;background:#0a0a14;border:1px solid #1e1e32;border-radius:12px;padding:12px;display:flex;align-items:center;gap:10px}
+.input-box input{flex:1;background:transparent;border:none;color:#fff;font-size:14px;outline:none;letter-spacing:1px}
+.otp-row{display:flex;gap:8px;margin-top:12px}
+.btn-otp{padding:12px;border-radius:12px;border:none;font-weight:800;font-size:12px;cursor:pointer;flex:1}
+.btn-send{background:#7c3aed;color:#fff}
+.btn-verify{background:#22c55e;color:#000;display:none}
+.timer{font-size:10px;color:#22c55e;text-align:center;margin-top:10px;display:none}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+<div style="display:flex;align-items:center;gap:10px"><div class="main-logo">PS</div><div><h1 style="font-size:14px">PS STUDYVERSE</h1><p style="font-size:8.5px;color:#7c3aed">education must be free for everyone</p></div></div><div style="opacity:0.5">🔔</div>
+</div>
+
+<div class="search-box"><span style="opacity:0.4">🔍</span><input type="text" placeholder="Search apps, courses, batches..."></div>
+
+<div class="insta-banner">
+<div style="display:flex;align-items:center;gap:10px"><div style="width:38px;height:38px;border-radius:10px;background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976);display:flex;align-items:center;justify-content:center">📸</div><div><div style="font-size:11px;font-weight:800">Follow My Insta</div><div style="font-size:12px;color:#feda75;font-weight:700">@its_fearless_boy__</div></div></div>
+<button style="background:#7c3aed;color:#fff;border:none;padding:7px 16px;border-radius:18px;font-size:11px;font-weight:800" onclick="window.open('https://instagram.com/its_fearless_boy__','_blank')">FOLLOW</button>
+</div>
+
+<div class="container">
+<div class="section-title">🔥 PW OFFICIAL FREE BATCHES</div>
+
+<div class="batch-card">
+<div class="ps-batch-logo udaan-bg"><div>🎓</div><div class="ps-text">PS</div><div>📖</div><div style="font-size:10px;font-weight:800">Udaan</div></div>
+<h3>PW Udaan Class 10 - 2026 FREE</h3><div style="font-size:10.5px;color:#6a6a8a;margin-top:3px">10K+ students • Complete Syllabus</div>
+<div class="btn-row"><button class="btn btn-study">STUDY NOW</button><button class="btn btn-down">DOWNLOAD</button><button class="btn btn-login" onclick="openLogin('Udaan')">LOGIN</button></div>
+</div>
+
+<div class="batch-card">
+<div class="ps-batch-logo arjuna-bg"><div>🎓</div><div class="ps-text">PS</div><div>📖</div><div style="font-size:10px;font-weight:800">Arjuna</div></div>
+<h3>PW Arjuna JEE 2026 - FREE</h3><div style="font-size:10.5px;color:#6a6a8a;margin-top:3px">15K+ students • JEE Mains + Advanced</div>
+<div class="btn-row"><button class="btn btn-study">STUDY NOW</button><button class="btn btn-down">DOWNLOAD</button><button class="btn btn-login" onclick="openLogin('Arjuna')">LOGIN</button></div>
+</div>
+
+<div class="batch-card">
+<div class="ps-batch-logo lakshya-bg"><div>🎓</div><div class="ps-text">PS</div><div>📖</div><div style="font-size:10px;font-weight:800">Lakshya</div></div>
+<h3>PW Lakshya NEET 2026 - FREE</h3><div style="font-size:10.5px;color:#6a6a8a;margin-top:3px">12K+ students • NEET UG</div>
+<div class="btn-row"><button class="btn btn-study">STUDY NOW</button><button class="btn btn-down">DOWNLOAD</button><button class="btn btn-login" onclick="openLogin('Lakshya')">LOGIN</button></div>
+</div>
+
+<div class="section-title">✨ 10 Premium Facilities - FREE</div>
+<div class="facility-grid">
+<div class="facility"><div style="width:28px;height:28px;border-radius:8px;background:#15151f;display:flex;align-items:center;justify-content:center">📝</div><div style="font-size:10px;font-weight:600">Daily Notes</div></div>
+<div class="facility"><div style="width:28px;height:28px;border-radius:8px;background:#15151f;display:flex;align-items:center;justify-content:center">📄</div><div style="font-size:10px;font-weight:600">DPP + Solutions</div></div>
+<div class="facility"><div style="width:28px;height:28px;border-radius:8px;background:#15151f;display:flex;align-items:center;justify-content:center">🎥</div><div style="font-size:10px;font-weight:600">Video Lectures</div></div>
+<div class="facility"><div style="width:28px;height:28px;border-radius:8px;background:#15151f;display:flex;align-items:center;justify-content:center">🧪</div><div style="font-size:10px;font-weight:600">Test Series</div></div>
+<div class="facility"><div style="width:28px;height:28px;border-radius:8px;background:#15151f;display:flex;align-items:center;justify-content:center">📚</div><div style="font-size:10px;font-weight:600">PYQ Bank</div></div>
+<div class="facility"><div style="width:28px;height:28px;border-radius:8px;background:#15151f;display:flex;align-items:center;justify-content:center">💬</div><div style="font-size:10px;font-weight:600">Doubt Support</div></div>
+<div class="facility"><div style="width:28px;height:28px;border-radius:8px;background:#15151f;display:flex;align-items:center;justify-content:center">🔴</div><div style="font-size:10px;font-weight:600">Live Classes</div></div>
+<div class="facility"><div style="width:28px;height:28px;border-radius:8px;background:#15151f;display:flex;align-items:center;justify-content:center">📊</div><div style="font-size:10px;font-weight:600">Progress Tracker</div></div>
+<div class="facility"><div style="width:28px;height:28px;border-radius:8px;background:#15151f;display:flex;align-items:center;justify-content:center">🏆</div><div style="font-size:10px;font-weight:600">Leaderboard</div></div>
+<div class="facility"><div style="width:28px;height:28px;border-radius:8px;background:#15151f;display:flex;align-items:center;justify-content:center">📱</div><div style="font-size:10px;font-weight:600">Offline Download</div></div>
+</div>
+</div>
+
+<div class="bottom-nav">
+<div class="nav-item active"><div class="ico">🏠</div><div class="lbl">Home</div></div>
+<div class="nav-item" onclick="alert('📚 My Learning\n45% Completed')"><div class="ico">📚</div><div class="lbl">My Learning</div></div>
+<div class="nav-item" onclick="alert('👤 Profile\n@its_fearless_boy__')"><div class="ico">👤</div><div class="lbl">Profile</div></div>
+</div>
+
+<!-- LOGIN WITH MOBILE + OTP MODAL -->
+<div class="modal-bg" id="loginModal">
+<div class="modal">
+<div style="display:flex;justify-content:space-between;align-items:center"><h3>🔐 Login - <span id="batchName">Udaan</span></h3><div style="cursor:pointer;font-size:20px" onclick="closeLogin()">✕</div></div>
+<p>Mobile number daalo, OTP aayega</p>
+
+<div class="input-box">
+<span>🇮🇳 +91</span>
+<input type="tel" id="mobileInput" placeholder="Enter 10 digit mobile number" maxlength="10" inputmode="numeric">
+</div>
+
+<div class="otp-row">
+<button class="btn-otp btn-send" id="sendBtn" onclick="sendOTP()">SEND OTP</button>
+</div>
+
+<div class="input-box" id="otpBox" style="display:none">
+<span>🔑</span>
+<input type="tel" id="otpInput" placeholder="Enter 6 digit OTP" maxlength="6" inputmode="numeric">
+</div>
+
+<div class="otp-row">
+<button class="btn-otp btn-verify" id="verifyBtn" onclick="verifyOTP()">VERIFY OTP & LOGIN</button>
+</div>
+
+<div class="timer" id="timer">OTP Sent to +91 <span id="mobShow"></span> • Demo OTP: <b id="demoOtp" style="color:#fff;font-size:14px"></b></div>
+<div style="font-size:9px;color:#4a4a6a;text-align:center;margin-top:12px">OTP 30 sec me expire hoga • PS STUDYVERSE Secure Login</div>
+</div>
+</div>
+
+<script>
+let generatedOTP = "";
+let currentMobile = "";
+let currentBatch = "";
+
+function openLogin(batch){
+  currentBatch = batch;
+  document.getElementById('batchName').innerText = batch;
+  document.getElementById('loginModal').style.display = 'flex';
+}
+function closeLogin(){
+  document.getElementById('loginModal').style.display = 'none';
+  resetOTP();
+}
+function resetOTP(){
+  document.getElementById('otpBox').style.display='none';
+  document.getElementById('verifyBtn').style.display='none';
+  document.getElementById('sendBtn').style.display='block';
+  document.getElementById('timer').style.display='none';
+  document.getElementById('mobileInput').value='';
+  document.getElementById('otpInput').value='';
+}
+
+function sendOTP(){
+  let mob = document.getElementById('mobileInput').value.trim();
+  if(mob.length !== 10 || isNaN(mob)){
+    alert('❌ Bhai sahi 10 digit mobile number daal! Eg: 9876543210');
+    return;
+  }
+  currentMobile = mob;
+  generatedOTP = Math.floor(100000 + Math.random()*900000).toString();
+  
+  document.getElementById('mobShow').innerText = mob;
+  document.getElementById('demoOtp').innerText = generatedOTP;
+  document.getElementById('otpBox').style.display='flex';
+  document.getElementById('verifyBtn').style.display='block';
+  document.getElementById('sendBtn').style.display='none';
+  document.getElementById('timer').style.display='block';
+  
+  // Simulate SMS
+  alert('📱 OTP Sent!\n\nMobile: +91 ' + mob + '\nDemo OTP: ' + generatedOTP + '\n\n(Real me SMS se aayega, abhi demo ke liye screen pe dikha raha hu)');
+  
+  // Auto clear after 30 sec
+  setTimeout(()=>{ generatedOTP=""; document.getElementById('timer').innerText="⏰ OTP Expired! Resend karo"; }, 30000);
+}
+
+function verifyOTP(){
+  let entered = document.getElementById('otpInput').value.trim();
+  if(entered === ""){
+    alert('❌ OTP daal bhai!');
+    return;
+  }
+  if(entered === generatedOTP){
+    alert('✅ Login Successful! 🎉\n\nWelcome to ' + currentBatch + ' Batch!\nMobile: +91 ' + currentMobile + '\n\nAb tu STUDY kar sakta hai! 🔥');
+    closeLogin();
+    // Save login status
+    localStorage.setItem('ps_login_' + currentBatch, currentMobile);
+  } else {
+    alert('❌ Galat OTP! Sahi OTP: ' + generatedOTP);
+  }
+}
+
+// Close modal on background click
+document.getElementById('loginModal').addEventListener('click', function(e){
+  if(e.target === this) closeLogin();
+});
+</script>
+
+</body>
+</html>
